@@ -1,0 +1,49 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - NCR SN</title>
+	
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/style.css")" />
+</head>
+<body>
+	<div id="main_body">
+		<header>
+			<img src='@Url.Content("~/Content/Images/logo.png")' width='80' > 
+			<h2>NCR Social Network</h2>
+		</header>
+
+		<nav>
+			<ul>
+				<li>@Html.ActionLink("Home", "Index", "")</li>
+				<li>@Html.ActionLink("Sports", "Sports", "Clubs")</li>				
+				<li>@Html.ActionLink("Health", "Health", "Clubs")</li>
+				<li>@Html.ActionLink("Dance", "Dance", "Clubs")</li>
+				<li>@Html.ActionLink("Festivals", "Festivals", "Clubs")</li>
+				<li>@Html.ActionLink("Music", "Music", "Clubs")</li>
+                <li><a href="#">Profile</a></li>
+				<li><a href="#">Admin</a></li>		
+                	
+			</ul>				
+		</nav>
+
+		<!--Main body content starts here-->
+		<div id="content">
+			<!--Main Section: Actual website data goes in this section-->
+			<section id="main_section">
+				<br>				
+				@RenderBody()		
+			</section>
+
+            <!--Sidebar: Userinfo and Login Information-->
+			<aside>
+				@RenderSection("Aside", required: false)
+			</aside>
+
+		</div>
+		<footer>
+			<p>NCR &copy 2013 </p>
+		</footer>
+	</div>
+</body>
+</html>

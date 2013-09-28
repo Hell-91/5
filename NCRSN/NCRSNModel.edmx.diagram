@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f9d34ea12584877b27735eb4d19feab" Name="Diagram1" ZoomLevel="74" >
+        <EntityTypeShape EntityType="NCRSNModel.Clubs" Width="1.875" PointX="1.375" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NCRSNModel.Event" Width="1.75" PointX="8.375" PointY="0.625" />
+        <EntityTypeShape EntityType="NCRSNModel.Comments" Width="1.75" PointX="4.625" PointY="0.5" />
+        <EntityTypeShape EntityType="NCRSNModel.EventLikeDislike" Width="2.125" PointX="7" PointY="4.875" />
+        <EntityTypeShape EntityType="NCRSNModel.ClubSubscribe" Width="1.75" PointX="1.625" PointY="4.25" />
+        <EntityTypeShape EntityType="NCRSNModel.Users" Width="1.5" PointX="4.625" PointY="3.875" />
+        <AssociationConnector Association="NCRSNModel.EventClubs" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

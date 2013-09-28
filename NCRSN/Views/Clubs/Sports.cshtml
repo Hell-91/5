@@ -1,0 +1,42 @@
+﻿@model NCRSN.ViewModels.SportsViewModel
+@{
+    ViewBag.Title = "Sports Club";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Hello!</h2>
+
+@section Aside {
+    <section id="profile_section">
+					<img src='@Url.Content("~/Content/Images/sports-logo.png")' alt="" width = "60%">	
+					<article id="profile_data">
+						<p><b>Club Name:</b> @Model.Club.Club_Name</p>
+						<p><b>Description:</b> @Model.Club.Club_Description</p>
+						<p><b>Moderator:</b> Prasad E. </p>
+						<p><b>No. of Events:</b> 20</p>
+						<p><b>No. of Users:</b> 40</p>	
+					</article>
+				</section>	
+				<br>
+				<input type="button" value="Join">
+				<input type="button" value="Message"> 
+				
+				<h3>Events</h3>
+				<article class="article_data">
+                    @foreach(var clubEvent in @Model.Events) {
+					    <a href="new_event.html"><p>@clubEvent.Event_Title</p></a>
+                    }
+					<a href="#"><p>Football</p></a>
+					<a href="#"><p>2K Run</p></a>
+					<a href="#"><p>Sfsdjfkjnd</p></a>
+					<a href="#"><p>Snnvblclc</p></a>
+				</article>
+					
+				<h3>People in this Club</h3>
+				<div id="club-members">
+                    @for(var i = 1; i <= 8; i++) {
+					<img src='@Url.Content("~/Content/Images/profile-picture_0" + i + ".png")' alt="" width="45em" height="45em">
+                    }
+				</div>
+}
+

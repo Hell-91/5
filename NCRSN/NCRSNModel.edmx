@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NCRSNModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="NCRSNModelStoreContainer">
+    <EntitySet Name="Clubs" EntityType="NCRSNModel.Store.Clubs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Events" EntityType="NCRSNModel.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Comments" EntityType="NCRSNModel.Store.Comments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventLikeDislikes" EntityType="NCRSNModel.Store.EventLikeDislikes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubSubscribes" EntityType="NCRSNModel.Store.ClubSubscribes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="NCRSNModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EventClubs" Association="NCRSNModel.Store.EventClubs">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Clubs" EntitySet="Clubs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Clubs">
+    <Key>
+      <PropertyRef Name="Club_Id" />
+    </Key>
+    <Property Name="Club_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Club_Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Club_Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Club_Moderator" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Event_Id" />
+    </Key>
+    <Property Name="Event_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Event_Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Event_Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Event_Moderator" Type="int" Nullable="false" />
+    <Property Name="Event_Club_Id" Type="int" Nullable="false" />
+    <Property Name="Event_Likes" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Event_Dislikes" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Event_Venue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Event_Date" Type="datetime" Nullable="false" />
+    <Property Name="Clubs_Club_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="Comment_Id" />
+    </Key>
+    <Property Name="Comment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment_Type" Type="bit" Nullable="false" />
+    <Property Name="Comment_Parent_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Comment_User_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Comment_Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EventLikeDislikes">
+    <Key>
+      <PropertyRef Name="EventLikeDislike_Id" />
+    </Key>
+    <Property Name="EventLikeDislike_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventLikeDislike_Event_Id" Type="int" Nullable="false" />
+    <Property Name="EventLikeDislike_User_Id" Type="int" Nullable="false" />
+    <Property Name="EventLikeDislike_Like" Type="decimal" Nullable="false" DefaultValue="-1" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="ClubSubscribes">
+    <Key>
+      <PropertyRef Name="ClubSubscribe_Id" />
+    </Key>
+    <Property Name="ClubSubscribe_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClubSubscribe_Club_Id" Type="int" Nullable="false" />
+    <Property Name="ClubSubscribe_User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="EventClubs">
+    <End Role="Event" Type="NCRSNModel.Store.Events" Multiplicity="*" />
+    <End Role="Clubs" Type="NCRSNModel.Store.Clubs" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Clubs">
+        <PropertyRef Name="Club_Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="Clubs_Club_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="NCRSNModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="NCRSNContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clubs" EntityType="NCRSNModel.Clubs" />
+          <EntitySet Name="Events" EntityType="NCRSNModel.Event" />
+          <EntitySet Name="Comments" EntityType="NCRSNModel.Comments" />
+          <EntitySet Name="EventLikeDislikes" EntityType="NCRSNModel.EventLikeDislike" />
+          <EntitySet Name="ClubSubscribes" EntityType="NCRSNModel.ClubSubscribe" />
+          <EntitySet Name="Users" EntityType="NCRSNModel.Users" />
+          <AssociationSet Name="EventClubs" Association="NCRSNModel.EventClubs">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Clubs" EntitySet="Clubs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Clubs">
+          <Key>
+            <PropertyRef Name="Club_Id" />
+          </Key>
+          <Property Type="Int32" Name="Club_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Club_Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Club_Description" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="Club_Moderator" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="NCRSNModel.EventClubs" FromRole="Clubs" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Event_Id" />
+          </Key>
+          <Property Type="Int32" Name="Event_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Event_Title" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Event_Description" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="Event_Moderator" Nullable="false" />
+          <Property Type="Int32" Name="Event_Club_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Event_Likes" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Event_Dislikes" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Event_Venue" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="DateTime" Name="Event_Date" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clubs" Relationship="NCRSNModel.EventClubs" FromRole="Event" ToRole="Clubs" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="Comment_Id" />
+          </Key>
+          <Property Type="Int32" Name="Comment_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="Comment_Type" Nullable="false" />
+          <Property Type="String" Name="Comment_Parent_Id" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Comment_User_Id" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Comment_Description" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="EventLikeDislike">
+          <Key>
+            <PropertyRef Name="EventLikeDislike_Id" />
+          </Key>
+          <Property Type="Int32" Name="EventLikeDislike_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="EventLikeDislike_Event_Id" Nullable="false" />
+          <Property Type="Int32" Name="EventLikeDislike_User_Id" Nullable="false" />
+          <Property Type="Decimal" Name="EventLikeDislike_Like" Nullable="false" DefaultValue="-1" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ClubSubscribe">
+          <Key>
+            <PropertyRef Name="ClubSubscribe_Id" />
+          </Key>
+          <Property Type="Int32" Name="ClubSubscribe_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ClubSubscribe_Club_Id" Nullable="false" />
+          <Property Type="Int32" Name="ClubSubscribe_User_Id" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Type="Int32" Name="User_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="EventClubs">
+          <End Type="NCRSNModel.Event" Role="Event" Multiplicity="*" />
+          <End Type="NCRSNModel.Clubs" Role="Clubs" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NCRSNModelStoreContainer" CdmEntityContainer="NCRSNContainer">
+    <EntitySetMapping Name="Clubs">
+      <EntityTypeMapping TypeName="IsTypeOf(NCRSNModel.Clubs)">
+        <MappingFragment StoreEntitySet="Clubs">
+          <ScalarProperty Name="Club_Id" ColumnName="Club_Id" />
+          <ScalarProperty Name="Club_Name" ColumnName="Club_Name" />
+          <ScalarProperty Name="Club_Description" ColumnName="Club_Description" />
+          <ScalarProperty Name="Club_Moderator" ColumnName="Club_Moderator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="IsTypeOf(NCRSNModel.Event)">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+          <ScalarProperty Name="Event_Title" ColumnName="Event_Title" />
+          <ScalarProperty Name="Event_Description" ColumnName="Event_Description" />
+          <ScalarProperty Name="Event_Moderator" ColumnName="Event_Moderator" />
+          <ScalarProperty Name="Event_Club_Id" ColumnName="Event_Club_Id" />
+          <ScalarProperty Name="Event_Likes" ColumnName="Event_Likes" />
+          <ScalarProperty Name="Event_Dislikes" ColumnName="Event_Dislikes" />
+          <ScalarProperty Name="Event_Venue" ColumnName="Event_Venue" />
+          <ScalarProperty Name="Event_Date" ColumnName="Event_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="IsTypeOf(NCRSNModel.Comments)">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="Comment_Id" ColumnName="Comment_Id" />
+          <ScalarProperty Name="Comment_Type" ColumnName="Comment_Type" />
+          <ScalarProperty Name="Comment_Parent_Id" ColumnName="Comment_Parent_Id" />
+          <ScalarProperty Name="Comment_User_Id" ColumnName="Comment_User_Id" />
+          <ScalarProperty Name="Comment_Description" ColumnName="Comment_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventLikeDislikes">
+      <EntityTypeMapping TypeName="IsTypeOf(NCRSNModel.EventLikeDislike)">
+        <MappingFragment StoreEntitySet="EventLikeDislikes">
+          <ScalarProperty Name="EventLikeDislike_Id" ColumnName="EventLikeDislike_Id" />
+          <ScalarProperty Name="EventLikeDislike_Event_Id" ColumnName="EventLikeDislike_Event_Id" />
+          <ScalarProperty Name="EventLikeDislike_User_Id" ColumnName="EventLikeDislike_User_Id" />
+          <ScalarProperty Name="EventLikeDislike_Like" ColumnName="EventLikeDislike_Like" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubSubscribes">
+      <EntityTypeMapping TypeName="IsTypeOf(NCRSNModel.ClubSubscribe)">
+        <MappingFragment StoreEntitySet="ClubSubscribes">
+          <ScalarProperty Name="ClubSubscribe_Id" ColumnName="ClubSubscribe_Id" />
+          <ScalarProperty Name="ClubSubscribe_Club_Id" ColumnName="ClubSubscribe_Club_Id" />
+          <ScalarProperty Name="ClubSubscribe_User_Id" ColumnName="ClubSubscribe_User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(NCRSNModel.Users)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="EventClubs" TypeName="NCRSNModel.EventClubs" StoreEntitySet="Events">
+      <EndProperty Name="Clubs">
+        <ScalarProperty Name="Club_Id" ColumnName="Clubs_Club_Id" />
+      </EndProperty>
+      <EndProperty Name="Event">
+        <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
